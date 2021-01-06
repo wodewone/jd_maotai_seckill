@@ -19,7 +19,8 @@ class Timer(object):
     def __init__(self, sleep_interval=0.5):
         # '2018-09-28 22:45:50.000'
         self.end_time = datetime.strptime(str(date.today()) + ' ' + global_config.getRaw('config', 'end_time'), "%Y-%m-%d %H:%M:%S.%f")
-        if self.local_time() > datetime.timestamp(self.end_time):
+
+        if self.local_time() > int(datetime.timestamp(self.end_time) * 1000):
             self.buy_time = datetime.strptime(str(date.today() + timedelta(days=1)) + ' ' + global_config.getRaw('config', 'buy_time'), "%Y-%m-%d %H:%M:%S.%f")
         else:
             self.buy_time = datetime.strptime(str(date.today()) + ' ' + global_config.getRaw('config', 'buy_time'), "%Y-%m-%d %H:%M:%S.%f")
